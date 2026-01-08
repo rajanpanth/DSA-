@@ -1,67 +1,71 @@
 #include <stdio.h>
+#include<conio.h>
 
 #define MAX 5
 
-int s1[MAX], s2[MAX];
-int top1 = -1, top2 = -1;
+// Global variables (No pointers needed)
+int queue[MAX];
+int front = -1;
+int rear = -1;
 
-/* Stack operations */
-void push1(int x) {
-    if (top1 == MAX - 1) {
-        printf("Stack Overflow\n");
-        return;
-    }
-    s1[++top1] = x;
-}
-
-void push2(int x) {
-    if (top2 == MAX - 1) {
-        printf("Stack Overflow\n");
-        return;
-    }
-    s2[++top2] = x;
-}
-
-int pop1() {
-    return s1[top1--];
-}
-
-int pop2() {
-    return s2[top2--];
-}
-
-/* Queue operations */
-void enqueue(int x) {
-    push1(x);
-    printf("%d enqueued\n", x);
-}
-
-void dequeue() {
-    int i;
-    if (top1 == -1 && top2 == -1) {
-        printf("Queue is empty\n");
-        return;
-    }
-
-    if (top2 == -1) {
-        while (top1 != -1) {
-            push2(pop1());
+// Function to add an element
+void enqueue(int value) {
+    if (rear == MAX - 1) {
+        printf("Queue Overflow! Cannot add %d\n", value);
+    } else {
+        if (front == -1) {
+            front = 0; // Initialize front on first insertion
         }
+        rear++;
+        queue[rear] = value;
+        printf("Enqueued: %d\n", value);
     }
-    printf("%d dequeued\n", pop2());
 }
 
-/* Main function */
+// Function to remove an element
+void dequeue() {
+    if (front == -1 || front > rear) {
+        printf("Queue Underflow! Nothing to remove.\n");
+    } else {
+        printf("Dequeued: %d\n", queue[front]);
+        front++;
+        
+        // // Optional: Reset if the queue becomes empty
+        // if (front > rear) {
+        //     front = rear = -1;
+        // }
+    }
+}
+
+// Function to display the queue
+void display() {
+    if (front == -1 || front > rear) {
+        printf("Queue is empty.\n");
+    } else {
+        printf("Queue elements: ");
+        for (int i = front; i <= rear; i++) {
+            printf("%d ", queue[i]);
+        }
+        printf("\n");
+    }
+}
+
 int main() {
     enqueue(10);
     enqueue(20);
-    enqueue(30);
+    enqueue(343);
+    enqueue(43);
+    enqueue(34);
+    display();
 
     dequeue();
     dequeue();
-
-    enqueue(40);
     dequeue();
+    dequeue();
+    dequeue();
+    dequeue();
+    display();
+    enqueue(44);
 
     return 0;
 }
