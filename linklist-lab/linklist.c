@@ -16,7 +16,7 @@ void create_linklist(struct Node** head, int n) {
         *head = NULL;
         return;
     }
-
+    
     for (i = 1; i <= n; i++) {
         // Allocate memory for a new node
         newNode = (struct Node*)malloc(sizeof(struct Node));
@@ -68,9 +68,7 @@ int main() {
 
     // Call the function with address of head and n
     create_linklist(&head, n);
-
     displayList(head);
-
     insertfront(&head, 40);
     displayList(head);
 
