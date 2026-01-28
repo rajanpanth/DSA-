@@ -3,7 +3,7 @@
 
 struct node {
     int data;
-    struct node *link;
+    struct node *next;
 };
 
 int main() {
@@ -12,13 +12,13 @@ int main() {
     for (int i = 1; i <= 100; i++) {
         newNode = (struct node *)malloc(sizeof(struct node));
         newNode->data = i;      // sample data
-        newNode->link = NULL;
+        newNode->next = NULL;
 
         if (head == NULL) {
             head = newNode;     // first node
             temp = head;
         } else {
-            temp->link = newNode;
+            temp->next = newNode;
             temp = newNode;
         }
     }
@@ -27,7 +27,7 @@ int main() {
     temp = head;
     while (temp != NULL) {
         printf("%d -> ", temp->data);
-        temp = temp->link;
+        temp = temp->next;
     }
     printf("NULL");
 
