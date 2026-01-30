@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <conio.h>
 
 struct node
 {
@@ -46,6 +45,5 @@ void main()
         printf("%d ", temp->data);
         temp = temp->next;
     }
-
-    getch();
+    printf("\n");
 }
